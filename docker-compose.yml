@@ -1,0 +1,13 @@
+version: "3"
+services:
+    crm-billing-service:
+        container_name: crm-billing
+        build:
+            context: ./
+            args:
+                JAR_FILE: target/crm-billing-0.0.1-SNAPSHOT.jar
+                PORT: 8080
+            dockerfile: Dockerfile
+        image: mschassisdialog/crm-billing:dev
+        ports:
+            - 8080:8080
