@@ -18,6 +18,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.ResponseEntity;
 import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.ApiKey;
 import springfox.documentation.service.AuthorizationScope;
@@ -34,6 +36,7 @@ public class SwaggerConfig {
 
         public static final String AUTHORIZATION_HEADER = "Authorization";
         public static final String DEFAULT_INCLUDE_PATTERN = "/api/.*";
+        private static final String BASE_PACKAGE = "lk.dialog.ms";
 
         @Bean
         public Docket swaggerSpringfoxDocket() {
@@ -52,8 +55,8 @@ public class SwaggerConfig {
                 .securitySchemes(Lists.newArrayList(apiKey()))
                 .useDefaultResponseMessages(false);
 
-            docket = docket.select()
-                           .paths(regex(DEFAULT_INCLUDE_PATTERN))
+            docket = docket.select().apis(RequestHandlerSelectors.basePackage(BASE_PACKAGE + ".controllers")).paths(
+                PathSelectors.regex("/.*"))
                            .build();
             return docket;
         }
