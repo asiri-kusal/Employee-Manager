@@ -24,7 +24,7 @@ public class TestController {
     	 */
     	@GetMapping("/all")
     	public String allAccess() {
-    		return "Public Content.";
+    		return "Public Content. changed";
     	}
 
     	/**
